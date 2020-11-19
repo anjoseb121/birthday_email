@@ -64,6 +64,12 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.filter_run_when_matching :focus
+
+  config.after(:each, type: :job) do
+    clear_enqueued_jobs
+    clear_performed_jobs
+    ActionMailer::Base.deliveries.clear
+  end
 end
 
 Shoulda::Matchers.configure do |config|

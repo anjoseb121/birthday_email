@@ -54,4 +54,16 @@ RSpec.describe User, type: :model do
       it { expect(user).not_to be_consented_to(key) }
     end
   end
+
+  describe "birthday_by_date" do
+    let(:date) { Time.zone.now }
+    let(:other_date) { Time.zone.now + 2.weeks }
+    let(:user_birth_today) { create :user, birthdate: Date.new(1990, date.month, date.day) }
+    let(:user_birth_other_day) { create :user, birthdate: Date.new(1990, other_date.month, other_date.day) }
+
+    context "when the users birthdate is today" do
+      it { expect(described_class.birthday_by_date(date)).to include(user_birth_today) }
+      it { expect(described_class.birthday_by_date(date)).not_to include(user_birth_other_day) }
+    end
+  end
 end

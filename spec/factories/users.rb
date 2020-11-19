@@ -28,9 +28,24 @@
 
 FactoryBot.define do
   factory :user do
+    transient do
+      consent_email { nil }
+    end
+
     sequence(:username) {|n| "username#{n}" }
     sequence(:email) {|n| "email#{n}@domain.com" }
     sequence(:preferred_name) {|n| "preferred_name#{n}" }
     birthdate { FFaker::Time.date }
+
+    trait :consented_email do
+      after :create do |user, evaluator|
+        create :user_consent, :consented, user: user, consent: evaluator.consent_email
+      end
+    end
+    trait :not_consented_email do
+      after :create do |user, evaluator|
+        create :user_consent, user: user, consent: evaluator.consent_email
+      end
+    end
   end
 end

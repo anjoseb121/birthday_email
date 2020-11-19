@@ -19,5 +19,9 @@
 FactoryBot.define do
   factory :consent do
     sequence(:key) {|n| "consent#{n}" }
+
+    trait :email_key do
+      key { 'email' }
+    end
   end
 end

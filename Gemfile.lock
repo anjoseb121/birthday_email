@@ -91,6 +91,10 @@ GEM
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     crass (1.0.4)
+    database_cleaner (1.8.5)
+    database_cleaner-active_record (1.8.0)
+      activerecord
+      database_cleaner (~> 1.8.0)
     debase (0.2.2)
       debase-ruby_core_source (>= 0.10.2)
     debase-ruby_core_source (0.10.4)
@@ -176,6 +180,8 @@ GEM
       rails (>= 4.2)
     launchy (2.4.3)
       addressable (~> 2.3)
+    letter_opener (1.7.0)
+      launchy (~> 2.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -380,6 +386,7 @@ DEPENDENCIES
   bullet
   byebug
   connection_pool
+  database_cleaner-active_record
   debase
   dotenv-rails
   factory_bot_rails
@@ -396,6 +403,7 @@ DEPENDENCIES
   guard-rubybeautify
   json_translate
   knock
+  letter_opener
   listen (>= 3.0.5, < 3.2)
   lockbox
   pg (>= 0.18, < 2.0)

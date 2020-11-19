@@ -43,6 +43,9 @@ class User < ApplicationRecord
   before_validation :monkeypatch_email_bidx
 
   scope :consented_to, ->(c) { joins(:user_consents).where(user_consents: {consent: c}) }
+  scope :birthday_by_date, lambda {|date|
+    where("extract(day from birthdate) = ? AND extract(month from birthdate) = ?", date.day, date.month)
+  }
 
   # Required because the blind_index doesn't seem to like the email column
   def monkeypatch_email_bidx
